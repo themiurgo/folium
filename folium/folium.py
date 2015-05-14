@@ -17,7 +17,6 @@ import json
 from uuid import uuid4
 
 from jinja2 import Environment, PackageLoader
-from pkg_resources import resource_string
 
 from folium import utilities
 from folium.six import text_type, binary_type, iteritems
@@ -585,11 +584,6 @@ class Map(object):
         js_temp = self.env.get_template('dvf_js_ref.txt').render()
         self.template_vars.update({'dvf_js': js_temp})
 
-        polygon_js = resource_string('folium',
-                                     'plugins/leaflet-dvf.markers.min.js')
-
-        self.plugins.update({'leaflet-dvf.markers.min.js': polygon_js})
-
     def lat_lng_popover(self):
         """Enable popovers to display Lat and Lon on each click."""
 
@@ -952,16 +946,13 @@ class Map(object):
 
         self.HTML = html_templ.render(self.template_vars)
 
-    def create_map(self, path='map.html', plugin_data_out=True, template=None):
+    def create_map(self, path='map.html', template=None):
         """Write Map output to HTML and data output to JSON if available.
 
         Parameters:
         -----------
         path: string, default 'map.html'
             Path for HTML output for map
-        plugin_data_out: boolean, default True
-            If using plugins such as awesome markers, write all plugin
-            data such as JS/CSS/images to path
         template: string, default None
             Custom template to render
 
@@ -977,12 +968,6 @@ class Map(object):
                 with open(path, 'w') as g:
                     json.dump(data, g)
 
-        if self.plugins and plugin_data_out:
-            for name, plugin in iteritems(self.plugins):
-                with open(name, 'w') as f:
-                    if isinstance(plugin, binary_type):
-                        plugin = text_type(plugin, 'utf8')
-                    f.write(plugin)
 
     def _repr_html_(self):
         """Build the HTML representation for IPython."""
