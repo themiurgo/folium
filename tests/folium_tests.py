@@ -75,7 +75,9 @@ class testFolium(object):
                 'min_lat': -90,
                 'max_lat': 90,
                 'min_lon': -180,
-                'max_lon': 180}
+                'max_lon': 180,
+                'plugin_headers': [],
+                'plugin_bodies': []}
 
         assert self.map.template_vars == tmpl
 
@@ -484,4 +486,18 @@ class testFolium(object):
 
         self.map.fit_bounds(bounds, max_zoom=15, padding=(3, 3))
         assert self.map.template_vars['fit_bounds'] == fit_bounds_rendered
+
+    def test_plugins(self):
+        """Test plugins"""
+        self.map.plugin(folium.plugin.Terminator())
+        #assert self.map.template_vars['fit_bounds'] == fit_bounds_rendered
+
+        #fit_bounds_tpl = self.env.get_template('fit_bounds.js')
+        #fit_bounds_rendered = fit_bounds_tpl.render({
+        #   'bounds': json.dumps(bounds),
+        #   'fit_bounds_options': json.dumps({'padding': (3,3), 'maxZoom': 15}),
+        #})
+
+        #self.map.fit_bounds(bounds, max_zoom=15, padding=(3, 3))
+        #assert self.map.template_vars['fit_bounds'] == fit_bounds_rendered
 

@@ -1,0 +1,15 @@
+[submodule "folium/plugins/Leaflet.Terminator"]
+	path = folium/plugins/Leaflet.Terminator
+	url = git@github.com:joergdietrich/Leaflet.Terminator.git
+[submodule "folium/plugins/Leaflet.FileLayer"]
+	path = folium/plugins/Leaflet.FileLayer
+	url = https://github.com/makinacorpus/Leaflet.FileLayer
+[submodule "folium/plugins/esri-leaflet"]
+	path = folium/plugins/esri-leaflet
+	url = git@github.com:Esri/esri-leaflet.git
+[submodule "folium/plugins/leaflet-omnivore"]
+	path = folium/plugins/leaflet-omnivore
+	url = git@github.com:mapbox/leaflet-omnivore.git
+[submodule "folium/plugins/leaflet.boatmarker"]
+	path = folium/plugins/leaflet.boatmarker
+	url = git@github.com:tomaszbrue/leaflet.boatmarker.git

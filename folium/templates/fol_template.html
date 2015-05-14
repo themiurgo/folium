@@ -28,6 +28,10 @@
    {{ vega }}
    {{ jquery }}
 
+   {% for plugin_header in plugin_headers %}
+   {{ plugin_header }}
+   {% endfor %}
+
    <style>
 
       html, body {
@@ -150,6 +154,10 @@
       {{ click_pop }}
 
       {{ fit_bounds }}
+
+      {% for plugin_body in plugin_bodies %}
+      {{ plugin_body }}
+      {% endfor %}
 
    </script>
 

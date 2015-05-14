@@ -125,7 +125,6 @@ class Map(object):
         # Mark counter, JSON, Plugins.
         self.mark_cnt = {}
         self.json_data = {}
-        self.plugins = {}
 
         # Location.
         if not location:
@@ -218,6 +217,8 @@ class Map(object):
         self.added_layers = []
         self.template_vars.setdefault('wms_layers', [])
         self.template_vars.setdefault('tile_layers', [])
+        self.template_vars.setdefault('plugin_headers', [])
+        self.template_vars.setdefault('plugin_bodies', [])
 
     @iter_obj('simple')
     def add_tile_layer(self, tile_name=None, tile_url=None, active=False):
@@ -945,6 +946,10 @@ class Map(object):
                 html_templ = self.env.from_string(html_templ)
 
         self.HTML = html_templ.render(self.template_vars)
+
+    def plugin(self, plugin):
+        self.template_vars['plugin_headers'].append(plugin.get_header(ENV))
+        self.template_vars['plugin_bodies'].append(plugin.get_body(ENV))
 
     def create_map(self, path='map.html', template=None):
         """Write Map output to HTML and data output to JSON if available.
